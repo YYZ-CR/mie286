@@ -1,0 +1,274 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --purple: 168 85 247;
+  --cyan: 6 182 212;
+  --surface: 255 255 255;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════════════ */
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #050507;
+  color: #e2e8f0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Subtle ambient radial gradient */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(var(--purple), 0.035) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(var(--cyan), 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Micro dot-grid texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(var(--surface), 0.02) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SHARED COMPONENTS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Card */
+.card {
+  background: rgba(var(--surface), 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(var(--surface), 0.05);
+  border-radius: 1.25rem;
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.3);
+}
+
+/* Primary button */
+.btn-primary {
+  background: linear-gradient(135deg, rgb(var(--purple)) 0%, #7c3aed 100%);
+  color: white;
+  box-shadow:
+    0 0 0 1px rgba(var(--purple), 0.3),
+    0 4px 20px rgba(var(--purple), 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.btn-primary:hover {
+  box-shadow:
+    0 0 0 1px rgba(var(--purple), 0.5),
+    0 8px 30px rgba(var(--purple), 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow:
+    0 0 0 1px rgba(var(--purple), 0.3),
+    0 2px 10px rgba(var(--purple), 0.2);
+}
+
+/* Icon containers */
+.icon-box {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+}
+.icon-box-purple {
+  background: rgba(var(--purple), 0.08);
+  border-color: rgba(var(--purple), 0.12);
+}
+.icon-box-cyan {
+  background: rgba(var(--cyan), 0.08);
+  border-color: rgba(var(--cyan), 0.12);
+}
+.icon-box-amber {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.12);
+}
+.icon-box-green {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.12);
+}
+
+/* Step number */
+.step-number {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.5rem;
+  background: rgba(var(--purple), 0.08);
+  border: 1px solid rgba(var(--purple), 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgb(var(--purple));
+  flex-shrink: 0;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+.badge-purple {
+  background: rgba(var(--purple), 0.08);
+  color: rgb(var(--purple));
+  border-color: rgba(var(--purple), 0.15);
+}
+.badge-amber {
+  background: rgba(245, 158, 11, 0.08);
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.15);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Screen transition */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  animation: fadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Logo shimmer */
+@keyframes logoGlow {
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(var(--purple), 0.35)); }
+  50%      { filter: drop-shadow(0 0 24px rgba(var(--purple), 0.55)) drop-shadow(0 0 48px rgba(var(--cyan), 0.15)); }
+}
+.logo-glow {
+  animation: logoGlow 4s ease-in-out infinite;
+}
+
+/* Decorative ring ping */
+@keyframes pingSlow {
+  0%   { transform: scale(1); opacity: 0.25; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+.animate-ping-slow {
+  animation: pingSlow 3.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Slow spin for decorative rings */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spinSlow 30s linear infinite;
+}
+
+/* ── Beat flash (visual condition) ─────────────────────────────── */
+@keyframes beatFlash {
+  0% {
+    background-color: rgba(var(--purple), 0.6);
+    box-shadow:
+      0 0 40px rgba(var(--purple), 0.6),
+      0 0 80px rgba(var(--purple), 0.25),
+      inset 0 0 25px rgba(var(--purple), 0.25);
+    transform: scale(1.05);
+  }
+  100% {
+    background-color: rgba(var(--purple), 0.05);
+    box-shadow: 0 0 60px rgba(var(--purple), 0.08);
+    transform: scale(1);
+  }
+}
+.beat-flash {
+  animation: beatFlash 200ms ease-out !important;
+}
+
+/* ── Idle circle breathing ─────────────────────────────────────── */
+@keyframes idleGlow {
+  0%, 100% { box-shadow: 0 0 30px rgba(var(--purple), 0.06), 0 0 60px rgba(var(--purple), 0.03); }
+  50%      { box-shadow: 0 0 40px rgba(var(--purple), 0.12), 0 0 80px rgba(var(--purple), 0.06); }
+}
+.tap-circle {
+  animation: idleGlow 3s ease-in-out infinite;
+  transition: transform 0.06s ease;
+}
+.tap-circle.beat-flash {
+  /* beatFlash overrides idleGlow */
+}
+
+/* ── Tap ripple ────────────────────────────────────────────────── */
+@keyframes rippleOut {
+  0%   { width: 0; height: 0; opacity: 0.35; }
+  100% { width: 200px; height: 200px; opacity: 0; }
+}
+.tap-ripple {
+  border-radius: 50%;
+  border: 1.5px solid rgba(var(--purple), 0.4);
+  transform: translate(-50%, -50%);
+  animation: rippleOut 0.6s ease-out forwards;
+}
+
+/* ── Countdown pop ─────────────────────────────────────────────── */
+@keyframes countdownPop {
+  0%   { transform: scale(0.3); opacity: 0; }
+  60%  { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.countdown-pop {
+  animation: countdownPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Sparkle particles ─────────────────────────────────────────── */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50%      { opacity: 0.7; transform: scale(1); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE OPTIMISATIONS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Prevent text selection everywhere */
+* {
+  -webkit-touch-callout: none;
+}
+
+/* Fix iOS viewport height */
+@supports (-webkit-touch-callout: none) {
+  .h-\[100dvh\] {
+    height: -webkit-fill-available;
+  }
+}
