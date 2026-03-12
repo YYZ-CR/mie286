@@ -62,7 +62,8 @@ export default function Home() {
     conditionOrderRef.current = order;
 
     // Random BPMs for each condition
-    const newBpms = { visual: randomBpm(), auditory: randomBpm() };
+    const placeholderbpm = 80;
+    const newBpms = { visual: placeholderbpm, auditory: placeholderbpm };
     setBpms(newBpms);
     bpmsRef.current = newBpms;
 
